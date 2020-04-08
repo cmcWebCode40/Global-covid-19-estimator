@@ -1,19 +1,19 @@
 const timeEstimator = (periodType, timeToElapse) => {
   switch (periodType) {
-    case 'days':
+    case 'days': {
       const unitInDays = Math.floor(timeToElapse / 3);
-      return (result = Math.pow(2, unitInDays));
-
-    case 'weeks':
+      return 2 ** unitInDays;
+    }
+    case 'weeks': {
       const weeksToDays = timeToElapse * 7;
       const unitInMonths = Math.floor(weeksToDays / 3);
-      return (result = Math.pow(2, unitInMonths));
-
-    case 'months':
+      return 2 ** unitInMonths;
+    }
+    case 'months': {
       const monthsToDays = timeToElapse * 30;
       const unitInWeeks = Math.floor(monthsToDays / 3);
-      return (result = Math.pow(2, unitInWeeks));
-
+      return 2 ** unitInWeeks;
+    }
     default:
       break;
   }
@@ -24,13 +24,10 @@ const covid19ImpactEstimator = (data) => {
   const impact = {};
   const severeImpact = {};
   impact.currentlyInfected = reportedCases * 10;
-  timeEstimator(periodType, timeToElapse);
-  impact.infectionsByRequestedTime = impact.currentlyInfected * result;
+  impact.infectionsByRequestedTime = impact.currentlyInfected * timeEstimator(periodType, timeToElapse);
   severeImpact.currentlyInfected = reportedCases * 50;
 
-  timeEstimator(periodType, timeToElapse);
-  severeImpact.infectionsByRequestedTime =
-    severeImpact.currentlyInfected * result;
+  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * timeEstimator(periodType, timeToElapse);
   return {
     data,
     impact,
