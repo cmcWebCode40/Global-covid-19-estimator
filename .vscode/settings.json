@@ -1,0 +1,11 @@
+{
+    "prettier.htmlWhitespaceSensitivity": "strict",
+    "prettier.jsxSingleQuote": true,
+    "prettier.prettierPath": ".prettierrc",
+    "prettier.printWidth": 100,
+    "prettier.proseWrap": "never",
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "none",
+    "prettier.useTabs": true,
+    "prettier.withNodeModules": true
+}
