@@ -58,10 +58,10 @@ const covid19ImpactEstimator = (data) => {
     * challenge three
     *
     */
-  impact.casesForICUByRequestedTime = Math.floor(impact.infectionsByRequestedTime * 0.05);
-  severeImpact.casesForICUByRequestedTime = Math.floor(infectionsByRequestedTime * 0.05);
-  impact.casesForVentilatorsByRequestedTime = Math.floor(impact.infectionsByRequestedTime * 0.02);
-  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(infectionsByRequestedTime * 0.02);
+  impact.casesForICUByRequestedTime = impact.infectionsByRequestedTime * 0.05;
+  severeImpact.casesForICUByRequestedTime = infectionsByRequestedTime * 0.05;
+  impact.casesForVentilatorsByRequestedTime = impact.infectionsByRequestedTime * 0.02;
+  severeImpact.casesForVentilatorsByRequestedTime = infectionsByRequestedTime * 0.02;
   const getFlightUSD = flightInUSD(
     periodType,
     timeToElapse,
