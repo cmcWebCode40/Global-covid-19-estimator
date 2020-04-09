@@ -13,14 +13,14 @@ const timeEstimator = (periodType, timeToElapse) => {
   return result;
 };
 
-const flightInUSD = (periodType, timeToElapse, avgDailyIncome) => {
+const flightInUSD = (periodType, timeToElapse, avgDailyIncome, avgDPI) => {
   let Indays;
   if (periodType === 'days') {
-    Indays = 0.65 * avgDailyIncome * timeToElapse;
+    Indays = avgDailyIncome * avgDPI * timeToElapse;
   } else if (periodType === 'weeks') {
-    Indays = 0.65 * avgDailyIncome * timeToElapse * 7;
+    Indays = avgDailyIncome * avgDPI * timeToElapse * 7;
   } else if (periodType === 'months') {
-    Indays = 0.65 * avgDailyIncome * timeToElapse * 30;
+    Indays = avgDailyIncome * avgDPI * timeToElapse * 30;
   }
   return Indays;
 };
@@ -31,7 +31,7 @@ const covid19ImpactEstimator = (data) => {
     periodType,
     timeToElapse,
     totalHospitalBeds,
-    region: { avgDailyIncomeInUSD }
+    region: { avgDailyIncomeInUSD, avgDailyIncomePopulation }
   } = data;
   const impact = {};
   const severeImpact = {};
@@ -62,7 +62,12 @@ const covid19ImpactEstimator = (data) => {
   severeImpact.casesForICUByRequestedTime = Math.floor(infectionsByRequestedTime * 0.05);
   impact.casesForVentilatorsByRequestedTime = Math.floor(impact.infectionsByRequestedTime * 0.02);
   severeImpact.casesForVentilatorsByRequestedTime = Math.floor(infectionsByRequestedTime * 0.02);
-  const getFlightUSD = flightInUSD(periodType, timeToElapse, avgDailyIncomeInUSD);
+  const getFlightUSD = flightInUSD(
+    periodType,
+    timeToElapse,
+    avgDailyIncomeInUSD,
+    avgDailyIncomePopulation
+  );
   const convertDollarsForSevereImpact = infectionsByRequestedTime * getFlightUSD;
   const convertDollarsForImpact = impact.infectionsByRequestedTime * getFlightUSD;
   impact.dollarsInFlight = Number(convertDollarsForImpact.toFixed(2));
