@@ -39,10 +39,10 @@ const covid19ImpactEstimator = (data) => {
    * challenge one
    */
   impact.currentlyInfected = reportedCases * 10;
-  const timeEstimate = timeEstimator(periodType, timeToElapse);
-  impact.infectionsByRequestedTime = Math.floor(impact.currentlyInfected * timeEstimate);
+  const timEstimate = timeEstimator(periodType, timeToElapse);
+  impact.infectionsByRequestedTime = Math.floor(impact.currentlyInfected * timEstimate);
   severeImpact.currentlyInfected = reportedCases * 50;
-  severeImpact.infectionsByRequestedTime = Math.floor(severeImpact.currentlyInfected * timeEstimate);
+  severeImpact.infectionsByRequestedTime = Math.floor(severeImpact.currentlyInfected * timEstimate);
   /**
    * challenge two
    */
