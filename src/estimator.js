@@ -1,3 +1,5 @@
+import { parse } from "@babel/core";
+
 const timeEstimator = (periodType, timeToElapse) => {
   let result;
   if (periodType === 'days') {
@@ -58,10 +60,10 @@ const covid19ImpactEstimator = (data) => {
     * challenge three
     *
     */
-  impact.casesForICUByRequestedTime = Math.floor(impact.infectionsByRequestedTime * 0.05);
-  severeImpact.casesForICUByRequestedTime = Math.floor(infectionsByRequestedTime * 0.05);
-  impact.casesForVentilatorsByRequestedTime = Math.floor(impact.infectionsByRequestedTime * 0.02);
-  severeImpact.casesForVentilatorsByRequestedTime = Math.floor(infectionsByRequestedTime * 0.02);
+  impact.casesForICUByRequestedTime = parseInt(impact.infectionsByRequestedTime * 0.05);
+  severeImpact.casesForICUByRequestedTime = parseInt(infectionsByRequestedTime * 0.05);
+  impact.casesForVentilatorsByRequestedTime = parseInt(impact.infectionsByRequestedTime * 0.02);
+  severeImpact.casesForVentilatorsByRequestedTime = parseInt(infectionsByRequestedTime * 0.02);
   const getFlightUSD = flightInUSD(
     periodType,
     timeToElapse,
@@ -70,8 +72,8 @@ const covid19ImpactEstimator = (data) => {
   );
   const convertDollarsForSevereImpact = infectionsByRequestedTime * getFlightUSD;
   const convertDollarsForImpact = impact.infectionsByRequestedTime * getFlightUSD;
-  impact.dollarsInFlight = Number(convertDollarsForImpact.toFixed(2));
-  severeImpact.dollarsInFlight = Number(convertDollarsForSevereImpact.toFixed(2));
+  impact.dollarsInFlight = parseInt(convertDollarsForImpact.toFixed(2));
+  severeImpact.dollarsInFlight = parseInt(convertDollarsForSevereImpact.toFixed(2));
   return {
     data,
     impact,
