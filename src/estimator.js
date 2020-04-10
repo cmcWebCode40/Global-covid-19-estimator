@@ -58,10 +58,10 @@ const covid19ImpactEstimator = (data) => {
     * challenge three
     *
     */
-  impact.casesForICUByRequestedTime = (impact.infectionsByRequestedTime * 0.05);
-  severeImpact.casesForICUByRequestedTime = (infectionsByRequestedTime * 0.05);
-  impact.casesForVentilatorsByRequestedTime = (impact.infectionsByRequestedTime * 0.02);
-  severeImpact.casesForVentilatorsByRequestedTime = (infectionsByRequestedTime * 0.02);
+  impact.casesForICUByRequestedTime = Math.trunc(impact.infectionsByRequestedTime * 0.05);
+  severeImpact.casesForICUByRequestedTime = Math.trunc(infectionsByRequestedTime * 0.05);
+  impact.casesForVentilatorsByRequestedTime = Math.trunc(impact.infectionsByRequestedTime * 0.02);
+  severeImpact.casesForVentilatorsByRequestedTime = Math.trunc(infectionsByRequestedTime * 0.02);
   const getFlightUSD = flightInUSD(
     periodType,
     timeToElapse,
@@ -70,8 +70,8 @@ const covid19ImpactEstimator = (data) => {
   );
   const convertDollarsForSevereImpact = infectionsByRequestedTime * getFlightUSD;
   const convertDollarsForImpact = impact.infectionsByRequestedTime * getFlightUSD;
-  impact.dollarsInFlight = (convertDollarsForImpact.toFixed(2));
-  severeImpact.dollarsInFlight = (convertDollarsForSevereImpact.toFixed(2));
+  impact.dollarsInFlight = Math.round(convertDollarsForImpact, 2);
+  severeImpact.dollarsInFlight = Math.round(convertDollarsForSevereImpact, 2);
   return {
     data,
     impact,
