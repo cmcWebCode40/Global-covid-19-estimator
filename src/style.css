@@ -1,0 +1,144 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: green;
+  --bg-color: #ebebeb;
+  --white-color: #ffff;
+  --box-shadow: #8f8f8f;
+  --red-color: rgb(43, 0, 0);
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: var(--bg-color);
+}
+
+header {
+  display: flex;
+  background-color: var(--white-color);
+  box-shadow: 2px 1px 4px 1px var(--box-shadow);
+}
+
+header h1 {
+  text-align: center;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+  margin: 1.4rem 0;
+}
+
+header img {
+  margin: 0.8rem ;
+}
+
+main section {
+  margin: 1rem 0.5rem;
+  width: auto;
+}
+form {
+  margin: 1rem auto;
+  background-color: var(--white-color);
+  border-radius: 0.4rem;
+  padding: 1rem 0;
+  box-shadow: 0px 1px 3px 1px var(--box-shadow);
+  width: 100%;
+}
+
+h3 {
+  color: var(--red-color);
+  font-weight: 300;
+}
+form div {
+  margin: 0.9rem 0.4rem;
+}
+
+form input[type='number'],
+[type='text'],
+[type='submit'] {
+  padding: 0.7rem 0.3rem;
+  border-radius: 0.4rem;
+  border: var(--primary-color) 1px solid;
+  width: 60%;
+  background-color: rgba(46, 46, 46, 0);
+}
+form input[type='submit'] {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  display: block;
+  margin: 1rem 0.5rem;
+  cursor: pointer;
+}
+
+form input[type='submit']:hover {
+  opacity: 0.8;
+  transition: all 0.3s ease-in;
+}
+
+select {
+  padding: 0.4rem;
+}
+
+.impact-cases div {
+  background-color: var(--white-color);
+  padding: 0.4rem 0.7rem;
+  margin: 0.7rem;
+  border-radius: 0.4rem;
+}
+.title {
+  font-size: 1.3rem;
+}
+.continent {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+/* .impact-cases p:nth-child(1) {
+    color: var(--red-color);
+    font-size: 1.3rem;
+} */
+
+.impact-cases p {
+  color: #000;
+  font-weight: 500;
+  border-bottom: 1px solid #f4f4f4;
+  padding: 0.4rem;
+}
+
+.impact-cases p .data {
+  color: var(--primary-color);
+}
+
+.impact-cases .title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  color: var(--red-color);
+}
+
+@media (min-width: 850px) {
+  header h1 {
+    padding: 0.6rem;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+  main {
+    align-items: center;
+  }
+  form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  input {
+    width: 90%;
+  }
+
+  .impact-cases {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
