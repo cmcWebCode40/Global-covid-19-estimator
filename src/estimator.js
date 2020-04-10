@@ -1,13 +1,13 @@
 const timeEstimator = (periodType, timeToElapse) => {
   let result;
   if (periodType === 'days') {
-    const unitInDays = Math.floor(timeToElapse / 3);
+    const unitInDays = Math.trunc(timeToElapse / 3);
     result = 2 ** unitInDays;
   } else if (periodType === 'weeks') {
-    const unitInMonths = Math.floor((timeToElapse * 7) / 3);
+    const unitInMonths = Math.trunc((timeToElapse * 7) / 3);
     result = 2 ** unitInMonths;
   } else if (periodType === 'months') {
-    const unitInWeeks = Math.floor((timeToElapse * 30) / 3);
+    const unitInWeeks = Math.trunc((timeToElapse * 30) / 3);
     result = 2 ** unitInWeeks;
   }
   return result;
@@ -16,11 +16,11 @@ const timeEstimator = (periodType, timeToElapse) => {
 const flightInUSD = (periodType, timeToElapse, avgDailyIncome, avgDPI) => {
   let Indays;
   if (periodType === 'days') {
-    Indays = avgDailyIncome * avgDPI * timeToElapse;
+    Indays = (avgDailyIncome * avgDPI) / timeToElapse;
   } else if (periodType === 'weeks') {
-    Indays = avgDailyIncome * avgDPI * timeToElapse * 7;
+    Indays = (avgDailyIncome * avgDPI) / (timeToElapse * 7);
   } else if (periodType === 'months') {
-    Indays = avgDailyIncome * avgDPI * timeToElapse * 30;
+    Indays = (avgDailyIncome * avgDPI) / (timeToElapse * 30);
   }
   return Indays;
 };
@@ -70,8 +70,8 @@ const covid19ImpactEstimator = (data) => {
   );
   const convertDollarsForSevereImpact = infectionsByRequestedTime * getFlightUSD;
   const convertDollarsForImpact = impact.infectionsByRequestedTime * getFlightUSD;
-  impact.dollarsInFlight = Math.round(convertDollarsForImpact, 2);
-  severeImpact.dollarsInFlight = Math.round(convertDollarsForSevereImpact, 2);
+  impact.dollarsInFlight = Math.trunc(convertDollarsForImpact);
+  severeImpact.dollarsInFlight = Math.trunc(convertDollarsForSevereImpact);
   return {
     data,
     impact,
