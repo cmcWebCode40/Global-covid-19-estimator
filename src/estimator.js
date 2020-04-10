@@ -1,13 +1,13 @@
 const timeEstimator = (periodType, timeToElapse) => {
   let result;
   if (periodType === 'days') {
-    const unitInDays = (timeToElapse / 3);
+    const unitInDays = Math.floor(timeToElapse / 3);
     result = 2 ** unitInDays;
   } else if (periodType === 'weeks') {
-    const unitInMonths = ((timeToElapse * 7) / 3);
+    const unitInMonths = Math.floor((timeToElapse * 7) / 3);
     result = 2 ** unitInMonths;
   } else if (periodType === 'months') {
-    const unitInWeeks = ((timeToElapse * 30) / 3);
+    const unitInWeeks = Math.floor((timeToElapse * 30) / 3);
     result = 2 ** unitInWeeks;
   }
   return result;
@@ -40,9 +40,9 @@ const covid19ImpactEstimator = (data) => {
    */
   impact.currentlyInfected = reportedCases * 10;
   const timEstimate = timeEstimator(periodType, timeToElapse);
-  impact.infectionsByRequestedTime = impact.currentlyInfected * timEstimate;
+  impact.infectionsByRequestedTime = (impact.currentlyInfected * timEstimate);
   severeImpact.currentlyInfected = reportedCases * 50;
-  severeImpact.infectionsByRequestedTime = severeImpact.currentlyInfected * timEstimate;
+  severeImpact.infectionsByRequestedTime = (severeImpact.currentlyInfected * timEstimate);
   /**
    * challenge two
    */
@@ -58,10 +58,10 @@ const covid19ImpactEstimator = (data) => {
     * challenge three
     *
     */
-  impact.casesForICUByRequestedTime = (impact.infectionsByRequestedTime * 0.05);
-  severeImpact.casesForICUByRequestedTime = (infectionsByRequestedTime * 0.05);
-  impact.casesForVentilatorsByRequestedTime = (impact.infectionsByRequestedTime * 0.02);
-  severeImpact.casesForVentilatorsByRequestedTime = (infectionsByRequestedTime * 0.02);
+  impact.casesForICUByRequestedTime = impact.infectionsByRequestedTime * 0.05;
+  severeImpact.casesForICUByRequestedTime = infectionsByRequestedTime * 0.05;
+  impact.casesForVentilatorsByRequestedTime = impact.infectionsByRequestedTime * 0.02;
+  severeImpact.casesForVentilatorsByRequestedTime = infectionsByRequestedTime * 0.02;
   const getFlightUSD = flightInUSD(
     periodType,
     timeToElapse,
